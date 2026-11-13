@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F6F4F1"><title>Morrow — your second memory</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">m</span><span>Morrow</span></div>
+      <button class="new-chat" id="newChat"><span>＋</span> New chat <kbd>⌘ K</kbd></button>
+      <div class="side-label">WORKSPACE</div>
+      <button class="nav-item active"><span class="nav-icon">◌</span> Chat</button>
+      <div class="library-heading"><span class="side-label">YOUR SOURCES</span><button id="addSource" class="icon-button" aria-label="Add a source">＋</button></div>
+      <div id="sourceList" class="source-list"><div class="empty-library">No sources yet.<br>Add notes or documents to get started.</div></div>
+      <div id="uploadStatus" class="upload-status" hidden aria-live="polite">
+        <div class="upload-status-heading"><span id="uploadName">Uploading file…</span><span id="uploadPercent">0%</span></div>
+        <div class="progress-track"><div id="uploadProgress" class="progress-fill"></div></div>
+        <div id="uploadPhase" class="upload-phase">Preparing upload</div>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="privacy-card"><span class="privacy-icon">⌑</span><div><strong>Private by design</strong><p>Your files stay on this device.</p></div></div>
+        <div class="profile"><div class="avatar">Y</div><div class="profile-copy"><strong>Your private space</strong><span>Local workspace</span></div><span class="more">···</span></div>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar"><div class="breadcrumb"><strong>Your personal library</strong></div><div class="top-actions"><span class="local-status"><i></i> Stored locally</span><button class="help-button" id="helpButton" aria-label="About this app">?</button></div></header>
+      <section class="conversation" id="conversation">
+        <div class="welcome" id="welcome">
+          <div class="welcome-eyebrow"><span class="eyebrow-line"></span> YOUR PERSONAL KNOWLEDGE SPACE <span class="eyebrow-line"></span></div>
+          <h1>What would you<br><em>like to find?</em></h1>
+          <p class="welcome-subtitle">Ask a question about your documents and notes.<br>Morrow will find the relevant passages for you.</p>
+          <button class="primary-upload" id="addFirst"><span>＋</span> Add documents <small>PDF, DOCX, TXT, MD</small></button>
+          <div class="suggestion-heading">Try asking</div>
+          <div class="suggestions">
+            <button class="suggestion" data-prompt="What are the key ideas in my notes?"><span class="suggestion-icon sage">✳</span><span><strong>Find the thread</strong><small>What are the key ideas in my notes?</small></span><b>↗</b></button>
+            <button class="suggestion" data-prompt="What should I remember from my documents?"><span class="suggestion-icon peach">⌁</span><span><strong>Recall a detail</strong><small>What should I remember?</small></span><b>↗</b></button>
+            <button class="suggestion" data-prompt="What topics come up most often in my library?"><span class="suggestion-icon lilac">◌</span><span><strong>See the bigger picture</strong><small>What comes up most often?</small></span><b>↗</b></button>
+          </div>
+        </div>
+        <div id="messages" class="messages" aria-live="polite"></div>
+      </section>
+      <div class="composer-wrap">
+        <form id="chatForm" class="composer">
+          <textarea id="messageInput" rows="1" maxlength="4000" placeholder="Ask a question about your sources…" aria-label="Message"></textarea>
+          <div class="composer-footer"><span class="composer-hint"><span>↳</span> Enter to send · Shift + Enter for a new line</span><button id="sendButton" class="send-button" type="submit" aria-label="Send message">↑</button></div>
+        </form>
+        <div class="composer-note">Morrow can make mistakes. Check important details against your sources.</div>
+      </div>
+      <div class="drop-overlay" id="dropOverlay">Drop files here to add them to your library</div>
+    </main>
+  </div>
+  <input type="file" id="fileInput" accept=".pdf,.docx,.txt,.md" multiple hidden>
+  <div id="toast" class="toast" role="status"></div>
+  <dialog id="helpDialog"><button class="dialog-close" id="closeDialog" aria-label="Close">×</button><div class="dialog-mark">m</div><h2>A quieter kind of assistant.</h2><p>Morrow searches your private library and can use a model running on your computer to help connect the dots.</p><div class="privacy-note"><strong>Private by design</strong><span>Documents and conversations are stored locally. For generated answers, install Ollama and run <code>ollama pull llama3.2</code>. Your prompts stay on your machine.</span></div><p class="setup-note">Without Ollama, Morrow can find passages but cannot synthesize an answer.</p></dialog>
+  <script src="/static/app.js"></script>
+</body>
+</html>
